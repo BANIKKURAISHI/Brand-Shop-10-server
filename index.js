@@ -26,9 +26,14 @@ async function run() {
   try {
      await client.connect();
      const userCollection =client.db('brandDB').collection('brand')
+     const userProduction =client.db('brandDB').collection('products')
 
    app.get("/brand",async(req,res)=>{
     const result =await userCollection.find().toArray()
+    res.send(result)
+   })
+   app.get("/products",async(req,res)=>{
+    const result =await userProduction.find().toArray()
     res.send(result)
    })
 
