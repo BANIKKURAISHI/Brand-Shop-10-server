@@ -32,13 +32,13 @@ async function run() {
     const result =await userCollection.find().toArray()
     res.send(result)
    })
-  //  app.get("/products/:brands",async(req,res)=>{
-  //   const brand=req.params.brand
-  //   const query={brand:brand}
-  //   const cursor=userProduction.find(query)
-  //   const result =await cursor.toArray()
-  //   res.send(result)
-  //  })
+   app.get("/products/:brand",async(req,res)=>{
+    const brand=req.params.brand
+    const query={brand:brand}
+    const cursor=userProduction.find(query)
+    const result =await cursor.toArray()
+    res.send(result)
+   })
   
   app.get("/products",async(req,res)=>{
     const result =await userProduction.find().toArray()
