@@ -43,7 +43,13 @@ async function run() {
       res.send(result)
       console.log(product)})
 
-
+      app.delete('/carts/:id',async(req,res)=>{
+        const id =req.params.id
+        const newId={_id:new ObjectId(id)}
+        const result =await userCarts.deleteOne(newId)
+        res.send(result)
+  
+      })
 
    app.get("/brand",async(req,res)=>{
     const result =await userCollection.find().toArray()
