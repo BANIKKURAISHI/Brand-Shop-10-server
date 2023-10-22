@@ -26,7 +26,7 @@ const client = new MongoClient(uri, {
 });
 async function run() {
   try {
-     await client.connect();
+ //    await client.connect();
      const userCollection =client.db('brandDB').collection('brand')
      const userProduction =client.db('brandDB').collection('products')
      const userCarts =client.db('brandDB').collection('carts')
@@ -35,6 +35,12 @@ async function run() {
     const result =await userCarts.find().toArray()
     res.send(result)
      })
+      app.get ('/carts/:email',async(req,res)=>{
+       const id=req.params.id 
+       console.log(id)
+       const query={email:email}
+       const result=await userProduction.findOne(query)
+       res.send(result)})
 
 
     app.post("/carts",async(req,res)=>{
@@ -94,14 +100,14 @@ async function run() {
     const update =req.body
     const up={
       $set:{
-        
         name:update.name,
         brand:update.brand,
         type:update.type,
-        details:update.details,
+        details:update.Details,
         price:update.price,
         rating:update.rating,
-        details:update.details
+        photo:update.image
+
       }
     }
     const result =await userProduction.updateOne(query,up,option)
@@ -119,8 +125,7 @@ async function run() {
    // await client.close();
   }
 }
-
+run().catch(console.dir);
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
-run().catch(console.dir);
